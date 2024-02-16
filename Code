@@ -11,7 +11,7 @@ def check(u):
     content_type = r.headers.get('Content-type')
     print(f"Content-Type: {content_type}")
   
-    with open("extension.txt", "r") as f:
+    with open("Extension.txt", "r") as f:
         ext = f.readlines()
         for e in ext:
             e = e.strip()
