@@ -1,0 +1,26 @@
+'''write a Python script that will check "Content-type incorrectly stated" on a particular URL.'''
+import requests
+import urllib
+import sys
+
+url = input("Enter the URL:")
+# print(urllib.request.urlopen(url).info())
+def check(u):
+    a = True
+    r = requests.get(u)
+    content_type = r.headers.get('Content-type')
+    print(f"Content-Type: {content_type}")
+  
+    with open("extension.txt", "r") as f:
+        ext = f.readlines()
+        for e in ext:
+            e = e.strip()
+            if content_type.startswith(e):
+                print("Content type correctly stated")
+                print("Ending Program",sys.exit(0))
+            else:
+              a = False
+              continue
+        if a == False:
+            print("Content type incorrectly stated")
+check(url)
