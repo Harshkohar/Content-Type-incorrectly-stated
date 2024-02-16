@@ -17,7 +17,7 @@ def check(u):
             e = e.strip()
             if content_type.startswith(e):
                 print("Content type correctly stated")
-                print("Ending Program",sys.exit(0))
+                sys.exit(0)
             else:
               a = False
               continue
