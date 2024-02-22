@@ -2,6 +2,7 @@
 import requests
 import urllib
 import sys
+from bs4 import BeautifulSoup
 
 url = input("Enter the URL:")
 # print(urllib.request.urlopen(url).info())
@@ -11,16 +12,25 @@ def check(u):
     content_type = r.headers.get('Content-type')
     print(f"Content-Type: {content_type}")
   
-    with open("Extension.txt", "r") as f:
-        ext = f.readlines()
-        for e in ext:
-            e = e.strip()
-            if content_type.startswith(e):
-                print("Content type correctly stated")
-                sys.exit(0)
-            else:
-              a = False
-              continue
-        if a == False:
-            print("Content type incorrectly stated")
+    # with open("extension.txt", "r") as f:
+    #     ext = f.readlines()
+    #     for e in ext:
+    #         e = e.strip()
+    #         if content_type.startswith(e):
+    #             print("Content type correctly stated")
+    #             sys.exit(0)
+    #         else:
+    #           # a = False
+    #           continue
+    #     # if a == False:
+    #     #     print("Content type incorrectly stated")
+    if "text/html" in content_type:
+      validate_content = BeautifulSoup(r.content, 'html.parser')
+      if validate_content.find():
+        print("Content is according to the type")
+      else:
+        print("Content type is correct but content is not according to the type")
+    else:
+      print("Content is not according to the type")
+      
 check(url)
